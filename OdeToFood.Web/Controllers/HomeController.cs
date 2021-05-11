@@ -1,26 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OdeToFood.Web.Models;
+using OdeToFood.Data.Services;// to add this reference to a separate project,
+                              // go to the project root,
+                              // in this case OdeToFood.Web and click add and then in the settings section
+                              // add the project you'd like to use - that will allow you to use the
+                              // other projects 
 
 namespace OdeToFood.Web.Controllers
 {
     public class HomeController : Controller
+        
     {
-        private readonly ILogger<HomeController> _logger;
+        IRestaurantData db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
+            db = new InMemoryRestaurantData();
         }
+        //private readonly ILogger<HomeController> _logger;
+
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
 
         public IActionResult Index()
         {
-            return View();
+            var model = db.GetAll();
+            return View(model);
         }
 
         public IActionResult Privacy()
