@@ -7,9 +7,9 @@ namespace OdeToFood.Data.Models
         {
         }
 
-        public int id { get; set; }
-        public string name { get; set; }
-        public string Cuisine { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public CuisineType Cuisine { get; set; }
 
 
 
